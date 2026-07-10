@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Кінь.Світ — українська онлайн-енциклопедія порід коней, історії, поезія, словник та інтерактивні добірки.">
+  <meta name="theme-color" content="#183b32">
+  <title>Кінь.Світ — енциклопедія порід, історії та поезія</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти до змісту</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Кінь.Світ — на головну">
+        <span class="brand-mark" aria-hidden="true">♞</span>
+        <span><strong>Кінь</strong><em>.Світ</em></span>
+      </a>
+
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Відкрити меню</span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Головна навігація">
+        <a href="#breeds">Породи</a>
+        <a href="#stories">Історії</a>
+        <a href="#poetry">Поезія</a>
+        <a href="#guide">Путівник</a>
+        <a href="#glossary">Словник</a>
+      </nav>
+
+      <button class="icon-button theme-toggle" type="button" aria-label="Змінити тему" title="Змінити тему">
+        <span aria-hidden="true">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section-dark">
+      <div class="hero-image" role="img" aria-label="Темний кінь на березі у вечірньому світлі"></div>
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <p class="eyebrow">Український простір про коней</p>
+        <h1>Світ, у якому кожен<br><em>кінь має свою історію</em></h1>
+        <p class="hero-lead">Велика довідка про породи, людські спогади, авторська поезія та практичні знання — без метушні, мов довга стежка через ранковий степ.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#breeds">Дослідити породи</a>
+          <button class="button button-ghost random-breed" type="button">Випадкова порода</button>
+        </div>
+        <dl class="hero-stats" aria-label="Коротка статистика сайту">
+          <div><dt id="breed-count">30</dt><dd>порід у довіднику</dd></div>
+          <div><dt>7</dt><dd>регіонів походження</dd></div>
+          <div><dt>100%</dt><dd>адаптивний сайт</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="intro-strip" aria-label="Про сайт">
+      <div class="container intro-grid">
+        <p class="intro-quote">«У коня немає голосу, яким він міг би пояснити себе. Тому людина має навчитися дивитися уважніше».</p>
+        <p>Картки порід містять стислий орієнтир, а не замінюють стандарти племінних книг. Зріст, масті й характер можуть відрізнятися залежно від лінії, країни та конкретної тварини.</p>
+      </div>
+    </section>
+
+    <section class="section breeds-section" id="breeds">
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Енциклопедія</p>
+            <h2>Породи коней світу</h2>
+          </div>
+          <p>Шукайте за назвою, країною, типом або призначенням. Додавайте у вибране й порівнюйте до трьох порід.</p>
+        </div>
+
+        <div class="filters" aria-label="Фільтри порід">
+          <label class="search-field">
+            <span class="sr-only">Пошук породи</span>
+            <span aria-hidden="true">⌕</span>
+            <input id="breed-search" type="search" placeholder="Наприклад, арабська або витривалість" autocomplete="off">
+          </label>
+
+          <label>
+            <span class="sr-only">Регіон</span>
+            <select id="region-filter">
+              <option value="all">Усі регіони</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="sr-only">Тип</span>
+            <select id="type-filter">
+              <option value="all">Усі типи</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="sr-only">Призначення</span>
+            <select id="use-filter">
+              <option value="all">Усі напрями</option>
+            </select>
+          </label>
+
+          <button class="button button-small button-outline" id="reset-filters" type="button">Скинути</button>
+        </div>
+
+        <div class="results-bar">
+          <p><strong id="results-count">30</strong> порід знайдено</p>
+          <button class="text-button" id="show-favorites" type="button" aria-pressed="false">♡ Лише вибране</button>
+        </div>
+
+        <div class="breed-grid" id="breed-grid" aria-live="polite"></div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <span aria-hidden="true">♘</span>
+          <h3>Порід за цими умовами не знайдено</h3>
+          <p>Спробуйте коротший запит або скиньте один із фільтрів.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="compare-dock" id="compare-dock" aria-live="polite" hidden>
+      <div class="container compare-dock-inner">
+        <div>
+          <strong>Порівняння</strong>
+          <span id="compare-summary">Оберіть 2–3 породи</span>
+        </div>
+        <div class="compare-actions">
+          <button class="text-button" id="clear-compare" type="button">Очистити</button>
+          <button class="button button-small button-primary" id="open-compare" type="button" disabled>Порівняти</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section stories-section" id="stories">
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Люди й коні</p>
+            <h2>Особисті історії</h2>
+          </div>
+          <p>Художні оповіді, створені спеціально для цього макета. Їх легко замінити реальними листами читачів або авторськими матеріалами.</p>
+        </div>
+
+        <div class="story-feature">
+          <div class="story-feature-image" role="img" aria-label="Людина обіймає коня"></div>
+          <article>
+            <p class="story-meta">Історія №1 · 7 хв читання</p>
+            <h3>Кінь, який не просив мене бути сильнішою</h3>
+            <p>Після довгої зими Марта приїхала на стайню лише «подивитися». Сірий мерин Туман не підійшов одразу. Він стояв біля огорожі й чекав, поки вона перестане вдавати, що все гаразд.</p>
+            <button class="text-button story-open" type="button" data-story="tuman">Читати історію →</button>
+          </article>
+        </div>
+
+        <div class="story-grid">
+          <article class="story-card">
+            <p class="story-meta">Історія №2 · 5 хв</p>
+            <h3>Ранок, коли Ластівка повернулася</h3>
+            <p>Про стару кобилу, відчинену хвіртку й шлях додому, який пам’ятається краще за будь-яку карту.</p>
+            <button class="text-button story-open" type="button" data-story="lastivka">Читати →</button>
+          </article>
+          <article class="story-card">
+            <p class="story-meta">Історія №3 · 6 хв</p>
+            <h3>Урок тиші від рудого поні</h3>
+            <p>Дитина, яка майже не розмовляла з людьми, щотижня розповідала все поні на ім’я Ґудзик.</p>
+            <button class="text-button story-open" type="button" data-story="gudzyk">Читати →</button>
+          </article>
+          <article class="story-card">
+            <p class="story-meta">Історія №4 · 4 хв</p>
+            <h3>Останній виїзд діда Степана</h3>
+            <p>Неквапна прогулянка польовою дорогою, де кожне дерево впізнавало їх обох.</p>
+            <button class="text-button story-open" type="button" data-story="stepan">Читати →</button>
+          </article>
+        </div>
+
+        <div class="story-lab">
+          <div>
+            <p class="eyebrow">Ваша черга</p>
+            <h3>Збережіть власну історію</h3>
+            <p>Напишіть текст у браузері, збережіть чернетку на цьому пристрої або експортуйте її у файл. Дані нікуди не надсилаються.</p>
+          </div>
+          <form id="story-form">
+            <label>Назва історії<input id="story-title" type="text" maxlength="100" placeholder="Наприклад: Моя перша зустріч із Вітром"></label>
+            <label>Ваш текст<textarea id="story-text" rows="7" maxlength="8000" placeholder="Почніть із моменту, який досі пам’ятаєте..."></textarea></label>
+            <div class="form-actions">
+              <button class="button button-small button-outline" id="save-story" type="button">Зберегти чернетку</button>
+              <button class="button button-small button-primary" id="export-story" type="button">Експортувати .txt</button>
+            </div>
+            <p class="form-status" id="story-status" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section poetry-section section-dark" id="poetry">
+      <div class="container">
+        <div class="section-heading split-heading light-heading">
+          <div>
+            <p class="eyebrow">Поетична стайня</p>
+            <h2>Вірші про коней</h2>
+          </div>
+          <p>Невеликий авторський цикл для атмосфери сайту. Тексти можна доповнювати, об’єднувати у збірки та публікувати з ілюстраціями.</p>
+        </div>
+
+        <div class="poetry-layout">
+          <article class="poem poem-featured">
+            <p class="poem-number">I</p>
+            <h3>Коли кінь біжить</h3>
+            <div class="poem-text">
+              <p>Коли кінь біжить —<br>земля не тримає,<br>а тільки на мить<br>під копитом лунає.</p>
+              <p>І вітер стає<br>не погодою — шляхом.<br>І серце твоє<br>вчиться дихати птахом.</p>
+            </div>
+          </article>
+
+          <div class="poem-stack">
+            <article class="poem">
+              <p class="poem-number">II</p>
+              <h3>Грива</h3>
+              <p class="poem-text">У гриві заплуталось поле,<br>полин і вечірній дим.<br>Ти гладиш — і світ поволі<br>стає не таким важким.</p>
+            </article>
+            <article class="poem">
+              <p class="poem-number">III</p>
+              <h3>Стайня вночі</h3>
+              <p class="poem-text">Тихо жують темряву коні,<br>місяць лежить на сіні.<br>Ніч притуляє теплі долоні<br>до дерев’яної стіни.</p>
+            </article>
+            <article class="poem">
+              <p class="poem-number">IV</p>
+              <h3>Довіра</h3>
+              <p class="poem-text">Не сідло. Не вуздечка. Не слово.<br>Лише крок, що не змусив тікати.<br>Довіра починається знову<br>там, де вміють повільно чекати.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section guide-section" id="guide">
+      <div class="container">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Для початківців</p>
+            <h2>Перед першою зустріччю</h2>
+          </div>
+          <p>Короткі орієнтири про безпечну й поважну взаємодію. Практичне навчання має відбуватися з досвідченим інструктором.</p>
+        </div>
+
+        <div class="guide-grid">
+          <article><span>01</span><h3>Підійдіть так, щоб кінь вас бачив</h3><p>Не підкрадайтеся ззаду. Говоріть спокійно, рухайтеся передбачувано й дайте тварині час вас роздивитися.</p></article>
+          <article><span>02</span><h3>Спочатку спостерігайте</h3><p>Положення вух, напруження шиї, хвіст і кроки часто підказують, чи кінь розслаблений, насторожений або просить дистанції.</p></article>
+          <article><span>03</span><h3>Не годуйте без дозволу</h3><p>Раціон коня може мати обмеження. Навіть звичні ласощі варто давати лише після дозволу власника або працівника стайні.</p></article>
+          <article><span>04</span><h3>Шолом — не декоративна річ</h3><p>Для верхової їзди потрібен сертифікований шолом, закрите взуття та інструктаж. Спокійний кінь усе одно залишається великою твариною.</p></article>
+        </div>
+
+        <aside class="care-note">
+          <div aria-hidden="true">✦</div>
+          <div><strong>Важливо</strong><p>Матеріали сайту мають пізнавальний характер і не замінюють консультацій ветеринара, коваля, берейтора чи сертифікованого тренера.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section glossary-section" id="glossary">
+      <div class="container glossary-layout">
+        <div>
+          <p class="eyebrow">Мова кінного світу</p>
+          <h2>Мінісловник</h2>
+          <p>Натисніть на термін, щоб побачити пояснення. Цей блок легко розширити до окремої абетки на сотні понять.</p>
+          <div class="glossary-terms" id="glossary-terms"></div>
+        </div>
+        <article class="glossary-definition" id="glossary-definition" aria-live="polite">
+          <span class="glossary-letter">М</span>
+          <p class="eyebrow">Обраний термін</p>
+          <h3>Масть</h3>
+          <p>Загальна назва забарвлення волосяного покриву коня, гриви й хвоста. У різних традиціях назви та межі окремих мастей можуть відрізнятися.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section sources-section">
+      <div class="container sources-card">
+        <div>
+          <p class="eyebrow">Для подальшої роботи</p>
+          <h2>Джерела й розвиток проєкту</h2>
+        </div>
+        <div>
+          <p>Для редакторської перевірки карток порід варто звірятися з офіційними племінними книгами, профільними асоціаціями та міжнародними базами. У макеті передбачено місце для посилань і фотоатрибуції.</p>
+          <ul class="source-links">
+            <li><a href="https://www.fao.org/dad-is/en" target="_blank" rel="noopener">FAO DAD-IS — міжнародна база порід</a></li>
+            <li><a href="https://www.amnh.org/explore/ology/zoology/all-about-horses" target="_blank" rel="noopener">American Museum of Natural History — огляд порід</a></li>
+            <li><a href="https://commons.wikimedia.org/wiki/Horses" target="_blank" rel="noopener">Wikimedia Commons — ілюстративні матеріали</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-dark">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">♞</span><span><strong>Кінь</strong><em>.Світ</em></span></a>
+        <p>Енциклопедія, літературний простір і майбутня спільнота людей, які вміють дивитися на коней уважно.</p>
+      </div>
+      <div>
+        <strong>Розділи</strong>
+        <a href="#breeds">Породи</a><a href="#stories">Історії</a><a href="#poetry">Поезія</a><a href="#glossary">Словник</a>
+      </div>
+      <div>
+        <strong>Технічне</strong>
+        <span>HTML + CSS + JavaScript</span>
+        <span>Без фреймворків і бекенду</span>
+        <span>Готово для GitHub Pages</span>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="current-year"></span> Кінь.Світ</span>
+      <a href="#top">Нагору ↑</a>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="breed-modal">
+    <button class="modal-close" type="button" aria-label="Закрити">×</button>
+    <div id="breed-modal-content"></div>
+  </dialog>
+
+  <dialog class="modal story-modal" id="story-modal">
+    <button class="modal-close" type="button" aria-label="Закрити">×</button>
+    <article id="story-modal-content"></article>
+  </dialog>
+
+  <dialog class="modal compare-modal" id="compare-modal">
+    <button class="modal-close" type="button" aria-label="Закрити">×</button>
+    <div>
+      <p class="eyebrow">Порівняння</p>
+      <h2>Породи поруч</h2>
+      <div class="compare-table-wrap" id="compare-table-wrap"></div>
+    </div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
