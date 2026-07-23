@@ -703,19 +703,25 @@ tr:last-child td { border-bottom: 0; }
   }
   .home-page .hero-content {
     width: 100%;
-    padding: 62px 38px 0;
+    padding: 62px 38px 44px;
   }
   .home-page .hero-text { max-width: 560px; }
   .home-page .hero-image-wrap {
     position: absolute;
-    top: 300px;
-    right: -17%;
+    z-index: 1;
+    top: 132px;
+    right: -14%;
     bottom: 0;
-    width: 78%;
-    height: 540px;
+    width: 82%;
+    height: calc(100% - 132px);
+  }
+  .home-page .hero-image-wrap::before {
+    display: block;
+    background: linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.9) 18%, rgba(255,255,255,.56) 38%, rgba(104, 66, 42, .16) 60%, rgba(78, 47, 31, .30) 100%);
   }
   .home-page .hero-image {
     object-position: right bottom;
+    filter: brightness(.8) saturate(.88) contrast(1.02) drop-shadow(-12px 18px 24px rgba(43, 22, 13, .12));
   }
   .home-page .hero-note {
     right: 22px;
@@ -742,17 +748,23 @@ tr:last-child td { border-bottom: 0; }
   .home-hero { padding: 24px 0 44px; background-size: 120px 120px, 120px 120px, auto, auto; }
   .hero-card, .page-hero-card { border-radius: 22px; }
   .hero-content { padding: 50px 24px 16px; }
-  .home-page .hero-content { padding: 44px 22px 0; }
+  .home-page .hero-content { padding: 44px 22px 34px; }
   .hero-title { font-size: clamp(3.2rem, 16vw, 4.5rem); }
   .hero-text { font-size: 1rem; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .button { width: 100%; }
   .hero-image-wrap { height: 390px; }
   .home-page .hero-image-wrap {
-    top: 320px;
-    right: -24%;
-    width: 102%;
-    height: 410px;
+    top: 118px;
+    right: -34%;
+    width: 122%;
+    height: calc(100% - 118px);
+  }
+  .home-page .hero-image-wrap::before {
+    background: linear-gradient(90deg, rgba(255,255,255,.99) 0%, rgba(255,255,255,.93) 18%, rgba(255,255,255,.66) 38%, rgba(106, 69, 44, .20) 62%, rgba(73, 43, 29, .34) 100%);
+  }
+  .home-page .hero-image {
+    filter: brightness(.76) saturate(.86) contrast(1.01) drop-shadow(-8px 14px 18px rgba(43, 22, 13, .10));
   }
   .hero-note { display: none; }
   .section { padding: 66px 0; }
