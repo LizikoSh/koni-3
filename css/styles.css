@@ -210,6 +210,58 @@ button { cursor: pointer; }
   backdrop-filter: blur(12px);
 }
 
+
+/* Головна сторінка: темна шапка на тлі херо та розширена композиція */
+.home-page .site-header {
+  position: sticky;
+  background: rgba(178, 126, 87, .96);
+  border-bottom-color: rgba(255, 255, 255, .16);
+  color: #fff;
+  backdrop-filter: blur(14px);
+}
+.home-page .logo-title,
+.home-page .main-nav a {
+  color: #fff;
+}
+.home-page .logo-subtitle {
+  color: rgba(255, 255, 255, .72);
+}
+.home-page .logo img {
+  filter: brightness(0) invert(1);
+}
+.home-page .main-nav a:hover,
+.home-page .main-nav a.is-active {
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+}
+.home-page .menu-toggle {
+  border-color: rgba(255, 255, 255, .34);
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+}
+.home-page .home-hero {
+  padding: 0 0 72px;
+  background:
+    linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px),
+    linear-gradient(180deg, #b9855f 0%, #c99770 100%);
+  background-size: 190px 190px, 190px 190px, auto;
+}
+.home-page .home-hero > .container {
+  width: min(100%, 1440px);
+}
+.home-page .hero-card {
+  min-height: 625px;
+  border-radius: 28px;
+  box-shadow: 0 28px 70px rgba(65, 38, 19, .16);
+}
+.home-page .hero-content {
+  padding-top: 112px;
+}
+.home-page .hero-image-wrap {
+  top: 64px;
+}
+
 .button {
   display: inline-flex;
   min-height: 52px;
@@ -543,6 +595,11 @@ tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 860px) {
   .header-inner { min-height: 72px; }
+  .home-page .main-nav {
+    border-color: rgba(255,255,255,.18);
+    background: rgba(78, 51, 36, .98);
+  }
+  .home-page .main-nav a { color: #fff; }
   .menu-toggle { display: inline-flex; }
   .main-nav {
     position: absolute;
@@ -578,6 +635,9 @@ tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 640px) {
   .container { width: min(calc(100% - 24px), var(--max)); }
+  .home-page .home-hero { padding: 0 0 44px; }
+  .home-page .home-hero > .container { width: 100%; }
+  .home-page .hero-card { border-radius: 20px; }
   .logo-subtitle { display: none; }
   .logo-title { font-size: 1.1rem; }
   .logo img { width: 40px; height: 40px; }
